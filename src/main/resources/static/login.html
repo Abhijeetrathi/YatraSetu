@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | YatraSetu</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #f8faff,
+                    #eef9f7
+                );
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-page {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(37, 60, 100, 0.15);
+
+            border: 1px solid #edf0f5;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo .train {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .login-logo h1 {
+            font-size: 28px;
+            color: #15284b;
+        }
+
+        .login-logo span {
+            color: #246bfd;
+        }
+
+        .login-logo p {
+            margin-top: 8px;
+            color: #7b8495;
+            font-size: 14px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .login-form label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #59667a;
+            margin-bottom: -10px;
+        }
+
+        .login-form input {
+            height: 50px;
+
+            border: 1px solid #dce1e9;
+
+            border-radius: 9px;
+
+            padding: 0 15px;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .login-form input:focus {
+            border-color: #246bfd;
+        }
+
+        .login-button {
+            height: 50px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #246bfd;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            background: #1556d8;
+        }
+
+        .login-message {
+            text-align: center;
+
+            font-size: 13px;
+
+            min-height: 18px;
+        }
+
+        .login-footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #7b8495;
+
+            font-size: 14px;
+        }
+
+        .login-footer a {
+            color: #246bfd;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .back-home {
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            color: #647085;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🚆 <span>YatraSetu</span>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/#trains">Trains</a>
+            <a href="/#about">About</a>
+        </nav>
+
+        <div class="nav-buttons">
+
+            <a href="/login.html">
+                <button class="login-btn">
+                    Login
+                </button>
+            </a>
+
+            <button class="register-btn">
+                Register
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- LOGIN -->
+
+    <main class="login-page">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+
+                <div class="train">
+                    🚆
+                </div>
+
+                <h1>
+                    Welcome to
+                    <span>YatraSetu</span>
+                </h1>
+
+                <p>
+                    Login to continue your journey
+                </p>
+
+            </div>
+
+
+            <form
+                class="login-form"
+                id="loginForm">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required>
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required>
+
+
+                <button
+                    type="submit"
+                    class="login-button">
+
+                    Login
+
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="login-message">
+                </div>
+
+            </form>
+
+
+            <div class="login-footer">
+
+                Don't have an account?
+
+                <a href="#">
+                    Register
+                </a>
+
+            </div>
+
+
+            <div class="back-home">
+
+                <a href="/">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            🚆 YatraSetu
+        </div>
+
+        <p>
+            © 2026 YatraSetu. Smart Railway Reservation.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("email").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                const message =
+                    document.getElementById("loginMessage");
+
+
+                if (!email || !password) {
+
+                    message.textContent =
+                        "Please enter email and password.";
+
+                    return;
+                }
+
+
+                message.textContent =
+                    "Login system will be connected to the database next.";
+
+            });
+
+    </script>
+
+</body>
+
+</html>
