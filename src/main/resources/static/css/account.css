@@ -1,0 +1,1710 @@
+/* =====================================================
+           RESET
+        ===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        min-height: 100vh;
+
+        color: #ffffff;
+
+        background: #07151c;
+
+        overflow-x: hidden;
+      }
+
+      /* =====================================================
+           BLURRED RAILWAY BACKGROUND
+        ===================================================== */
+
+      .background {
+        position: fixed;
+
+        inset: -25px;
+
+        z-index: -5;
+
+        background-image: url("/images/account-bg.png");
+
+        background-size: cover;
+
+        background-position: center;
+
+        filter: blur(7px);
+
+        transform: scale(1.05);
+      }
+
+      .background-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: -4;
+
+        background: linear-gradient(
+          180deg,
+          rgba(3, 13, 18, 0.72),
+          rgba(4, 18, 25, 0.4) 45%,
+          rgba(2, 12, 17, 0.72)
+        );
+      }
+
+      .background-overlay::after {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background: radial-gradient(
+          circle at 50% 25%,
+          rgba(45, 183, 211, 0.08),
+          transparent 45%
+        );
+      }
+
+      /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+      .navbar {
+        height: 80px;
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 8%;
+
+        background: rgba(3, 13, 18, 0.74);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+
+        backdrop-filter: blur(16px);
+
+        -webkit-backdrop-filter: blur(16px);
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+      }
+
+      /* =====================================================
+           LOGO
+        ===================================================== */
+
+      .logo {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-decoration: none;
+
+        color: white;
+
+        font-size: 26px;
+
+        font-weight: 750;
+
+        letter-spacing: -0.6px;
+      }
+
+      .logo-icon {
+        width: 42px;
+
+        height: 42px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 30px;
+      }
+
+      .logo span {
+        color: #ffffff;
+      }
+
+      /* =====================================================
+           NAV LINKS
+        ===================================================== */
+
+      .nav-links {
+        display: flex;
+
+        align-items: center;
+
+        gap: 45px;
+
+        height: 100%;
+      }
+
+      .nav-links a {
+        position: relative;
+
+        height: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        text-decoration: none;
+
+        color: rgba(255, 255, 255, 0.62);
+
+        font-size: 17px;
+
+        font-weight: 500;
+
+        transition: color 0.25s ease;
+      }
+
+      .nav-links a:hover {
+        color: white;
+      }
+
+      .nav-links a.active {
+        color: white;
+
+        font-weight: 650;
+      }
+
+      .nav-links a.active::after {
+        content: "";
+
+        position: absolute;
+
+        bottom: 0;
+
+        left: 0;
+
+        right: 0;
+
+        height: 3px;
+
+        background: white;
+
+        border-radius: 4px 4px 0 0;
+      }
+
+      /* =====================================================
+           PAGE
+        ===================================================== */
+
+      .page {
+        width: min(1060px, 92%);
+
+        margin: 45px auto 70px;
+
+        padding: 0 8px;
+      }
+
+      /* =====================================================
+           GLASS
+        ===================================================== */
+
+      .glass {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.19),
+          rgba(255, 255, 255, 0.09)
+        );
+
+        border: 1px solid rgba(255, 255, 255, 0.45);
+
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      /* =====================================================
+           PROFILE HEADER
+        ===================================================== */
+
+      .profile-header {
+        min-height: 140px;
+
+        border-radius: 18px;
+
+        padding: 25px 30px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 25px;
+
+        margin-bottom: 20px;
+      }
+
+      .profile-left {
+        display: flex;
+
+        align-items: center;
+
+        gap: 22px;
+
+        min-width: 0;
+      }
+
+      /* =====================================================
+           AVATAR
+        ===================================================== */
+
+      .avatar {
+        width: 88px;
+
+        height: 88px;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: rgba(255, 255, 255, 0.9);
+
+        color: #203648;
+
+        font-size: 37px;
+
+        font-weight: 500;
+
+        border: 1px solid rgba(255, 255, 255, 0.8);
+
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16);
+      }
+
+      /* =====================================================
+           PROFILE DETAILS
+        ===================================================== */
+
+      .profile-details {
+        min-width: 0;
+      }
+
+      .profile-details h1 {
+        font-size: 29px;
+
+        font-weight: 700;
+
+        margin-bottom: 5px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+      }
+
+      .profile-details p {
+        font-size: 15px;
+
+        color: rgba(255, 255, 255, 0.9);
+
+        margin-bottom: 8px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+      }
+
+      /* =====================================================
+           MEMBER BADGE
+        ===================================================== */
+
+      .member-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 6px;
+
+        padding: 5px 12px;
+
+        border-radius: 20px;
+
+        background: rgba(13, 225, 211, 0.18);
+
+        border: 1px solid rgba(13, 225, 211, 0.55);
+
+        color: #45f4e9;
+
+        font-size: 13px;
+
+        font-weight: 600;
+      }
+
+      .member-check {
+        width: 17px;
+
+        height: 17px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #25cfc2;
+
+        color: #073039;
+
+        font-size: 11px;
+
+        font-weight: 900;
+      }
+
+      /* =====================================================
+           EDIT PROFILE BUTTON
+        ===================================================== */
+
+      .edit-profile-button {
+        flex-shrink: 0;
+
+        border: none;
+
+        padding: 12px 25px;
+
+        border-radius: 10px;
+
+        background: linear-gradient(135deg, #16e0df, #54c8ee);
+
+        color: #05232d;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        box-shadow: 0 6px 20px rgba(18, 218, 218, 0.25);
+
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .edit-profile-button:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 9px 25px rgba(18, 218, 218, 0.35);
+      }
+
+      /* =====================================================
+           MAIN GRID
+        ===================================================== */
+
+      .main-grid {
+        display: grid;
+
+        grid-template-columns:
+          minmax(0, 1.65fr)
+          minmax(280px, 0.9fr);
+
+        gap: 20px;
+
+        align-items: start;
+      }
+
+      /* =====================================================
+           PERSONAL INFORMATION
+        ===================================================== */
+
+      .information-panel {
+        border-radius: 18px;
+
+        padding: 28px 30px 30px;
+
+        min-height: 326px;
+      }
+
+      .panel-title {
+        font-size: 21px;
+
+        font-weight: 700;
+
+        margin-bottom: 20px;
+      }
+
+      /* =====================================================
+           INFORMATION GRID
+        ===================================================== */
+
+      .info-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 16px;
+
+        width: 100%;
+      }
+
+      .info-box {
+        min-height: 78px;
+
+        border-radius: 12px;
+
+        padding: 14px 16px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.24),
+          rgba(255, 255, 255, 0.12)
+        );
+
+        border: 1px solid rgba(255, 255, 255, 0.36);
+
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+
+      .info-icon {
+        width: 46px;
+
+        height: 46px;
+
+        flex-shrink: 0;
+
+        border-radius: 10px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: rgba(255, 255, 255, 0.88);
+
+        color: #1e3340;
+
+        font-size: 21px;
+      }
+
+      .info-content {
+        min-width: 0;
+      }
+
+      .info-label {
+        display: block;
+
+        font-size: 12px;
+
+        color: rgba(255, 255, 255, 0.72);
+
+        margin-bottom: 3px;
+      }
+
+      .info-value {
+        display: block;
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        color: white;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+      }
+
+      .empty-value {
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      /* =====================================================
+           RIGHT COLUMN
+        ===================================================== */
+
+      .right-column {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 20px;
+      }
+
+      /* =====================================================
+           BOOKINGS
+        ===================================================== */
+
+      .booking-panel {
+        border-radius: 18px;
+
+        padding: 26px 28px;
+
+        min-height: 185px;
+      }
+
+      .booking-preview {
+        padding: 14px;
+
+        border-radius: 12px;
+
+        background: rgba(255, 255, 255, 0.16);
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        margin-bottom: 13px;
+      }
+
+      .booking-top {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        margin-bottom: 7px;
+      }
+
+      .booking-icon {
+        width: 42px;
+
+        height: 42px;
+
+        border-radius: 10px;
+
+        background: rgba(255, 255, 255, 0.2);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 22px;
+      }
+
+      .booking-label {
+        font-size: 12px;
+
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .booking-route {
+        font-size: 16px;
+
+        font-weight: 650;
+      }
+
+      .view-bookings-button {
+        width: 100%;
+
+        height: 44px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: linear-gradient(135deg, #10e3d1, #19d9e9);
+
+        color: #032c35;
+
+        font-size: 15px;
+
+        font-weight: 750;
+
+        cursor: pointer;
+
+        transition: transform 0.2s ease;
+      }
+
+      .view-bookings-button:hover {
+        transform: translateY(-1px);
+      }
+
+      /* =====================================================
+           SECURITY
+        ===================================================== */
+
+      .security-panel {
+        border-radius: 18px;
+
+        padding: 26px 28px;
+      }
+
+      .security-button {
+        width: 100%;
+
+        height: 44px;
+
+        border-radius: 10px;
+
+        border: 1px solid rgba(255, 255, 255, 0.34);
+
+        background: rgba(255, 255, 255, 0.17);
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: background 0.2s ease;
+      }
+
+      .security-button:hover {
+        background: rgba(255, 255, 255, 0.26);
+      }
+
+      /* =====================================================
+           ACCOUNT MANAGEMENT
+        ===================================================== */
+
+      .account-management {
+        margin-top: 20px;
+
+        border-radius: 18px;
+
+        padding: 24px 30px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 30px;
+      }
+
+      .management-title {
+        font-size: 20px;
+
+        font-weight: 700;
+
+        margin-bottom: 4px;
+      }
+
+      .management-description {
+        font-size: 12px;
+
+        color: rgba(255, 255, 255, 0.66);
+      }
+
+      .management-buttons {
+        display: flex;
+
+        gap: 12px;
+      }
+
+      .logout-button,
+      .delete-button {
+        height: 43px;
+
+        padding: 0 27px;
+
+        border-radius: 9px;
+
+        font-size: 14px;
+
+        font-weight: 650;
+
+        cursor: pointer;
+
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .logout-button {
+        border: none;
+
+        background: linear-gradient(135deg, #1c70e8, #2279d7);
+
+        color: white;
+
+        box-shadow: 0 5px 18px rgba(25, 102, 222, 0.25);
+      }
+
+      .logout-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .delete-button {
+        border: 1px solid rgba(255, 100, 100, 0.75);
+
+        background: rgba(190, 43, 43, 0.25);
+
+        color: white;
+
+        box-shadow: 0 0 14px rgba(255, 76, 76, 0.13);
+      }
+
+      .delete-button:hover {
+        background: rgba(205, 48, 48, 0.45);
+
+        box-shadow: 0 0 20px rgba(255, 76, 76, 0.22);
+      }
+
+      /* =====================================================
+           EDIT PROFILE FORM
+        ===================================================== */
+
+      #editProfileForm {
+        display: none;
+
+        margin-top: 22px;
+
+        padding-top: 22px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .form-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 16px;
+      }
+
+      .form-group {
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-size: 12px;
+
+        font-weight: 600;
+
+        margin-bottom: 7px;
+
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-group input,
+      .form-group select {
+        height: 43px;
+
+        border-radius: 8px;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        background: rgba(255, 255, 255, 0.16);
+
+        color: white;
+
+        padding: 0 12px;
+
+        outline: none;
+
+        font-size: 13px;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: #43e6ed;
+
+        box-shadow: 0 0 0 3px rgba(45, 225, 230, 0.1);
+      }
+
+      .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.48);
+      }
+
+      .form-group select option {
+        color: #172033;
+
+        background: white;
+      }
+
+      .form-actions {
+        display: flex;
+
+        gap: 10px;
+
+        margin-top: 18px;
+      }
+
+      .save-button,
+      .cancel-button {
+        height: 41px;
+
+        padding: 0 21px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        font-weight: 650;
+
+        cursor: pointer;
+      }
+
+      .save-button {
+        border: none;
+
+        background: #15dcd9;
+
+        color: #062c34;
+      }
+
+      .cancel-button {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        background: rgba(255, 255, 255, 0.1);
+
+        color: white;
+      }
+
+      /* =====================================================
+           PASSWORD FORM
+        ===================================================== */
+
+      #changePasswordForm {
+        display: none;
+
+        margin-top: 19px;
+
+        padding-top: 19px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .password-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 14px;
+      }
+
+      .password-grid .form-group:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .password-note {
+        font-size: 11px;
+
+        color: rgba(255, 255, 255, 0.62);
+
+        margin-top: 9px;
+      }
+
+      /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+      .mobile-menu {
+        display: none;
+
+        border: none;
+
+        background: transparent;
+
+        color: white;
+
+        font-size: 24px;
+
+        cursor: pointer;
+      }
+
+      /* =====================================================
+           TABLET
+        ===================================================== */
+
+      @media (max-width: 850px) {
+        .navbar {
+          padding: 0 5%;
+        }
+
+        .nav-links {
+          gap: 25px;
+        }
+
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .right-column {
+          display: grid;
+
+          grid-template-columns: 1fr 1fr;
+
+          gap: 18px;
+        }
+
+        .account-management {
+          flex-direction: column;
+
+          align-items: flex-start;
+        }
+
+        .management-buttons {
+          width: 100%;
+        }
+
+        .logout-button,
+        .delete-button {
+          flex: 1;
+        }
+      }
+
+      /* =====================================================
+           MOBILE
+        ===================================================== */
+
+      @media (max-width: 600px) {
+        .navbar {
+          height: 68px;
+
+          padding: 0 20px;
+        }
+
+        .logo {
+          font-size: 21px;
+        }
+
+        .logo-icon {
+          width: 34px;
+
+          height: 34px;
+
+          font-size: 24px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .page {
+          width: 94%;
+
+          margin-top: 25px;
+
+          margin-bottom: 35px;
+
+          padding: 0;
+        }
+
+        .profile-header {
+          padding: 20px;
+
+          flex-direction: column;
+
+          align-items: flex-start;
+
+          min-height: auto;
+        }
+
+        .profile-left {
+          width: 100%;
+
+          gap: 15px;
+        }
+
+        .avatar {
+          width: 68px;
+
+          height: 68px;
+
+          font-size: 29px;
+        }
+
+        .profile-details h1 {
+          font-size: 22px;
+        }
+
+        .profile-details p {
+          font-size: 13px;
+        }
+
+        .edit-profile-button {
+          width: 100%;
+        }
+
+        .main-grid {
+          gap: 15px;
+        }
+
+        .information-panel,
+        .booking-panel,
+        .security-panel,
+        .account-management {
+          padding: 20px;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+
+          gap: 13px;
+        }
+
+        .info-box {
+          min-height: 72px;
+
+          padding: 12px 14px;
+        }
+
+        .right-column {
+          display: flex;
+
+          gap: 15px;
+        }
+
+        .account-management {
+          margin-top: 15px;
+        }
+
+        .form-grid,
+        .password-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .password-grid .form-group:first-child {
+          grid-column: auto;
+        }
+
+        .management-buttons {
+          flex-direction: column;
+
+          width: 100%;
+        }
+
+        .logout-button,
+        .delete-button {
+          width: 100%;
+        }
+      }
+
+/* =====================================================
+   ACCOUNT DASHBOARD VISUAL REFRESH
+===================================================== */
+:root { --account-blue:#0862ff; --account-navy:#062b63; --account-ink:#071b53; }
+body { color:var(--account-ink); background:#e6f1ff; overflow-x:hidden; }
+.background { background-image:url("/images/account-bg.png") !important; background-size:cover !important; background-position:center !important; filter:none !important; transform:none !important; }
+.background-overlay { background:transparent !important; }
+.background-overlay::after { background:radial-gradient(ellipse at 90% 22%,rgba(67,145,255,.23),transparent 36%),radial-gradient(ellipse at 8% 90%,rgba(63,148,255,.2),transparent 40%); }
+.navbar { height:68px; padding:0 clamp(18px,5.2vw,86px); background:linear-gradient(90deg,#03245a,#06346e 55%,#031e4c); box-shadow:0 4px 18px rgba(0,37,99,.18); }
+.logo { font-size:27px; gap:10px; color:#fff; }
+.logo span:last-child { color:#fff; }
+.logo span:last-child::first-letter { color:inherit; }
+.nav-links { gap:clamp(18px,3vw,45px); }
+.nav-links a { color:#f3f8ff; font-size:16px; font-weight:650; padding:0 6px; }
+.nav-links a.active { background:linear-gradient(90deg,#00baff,#075bff); border-radius:28px; padding:0 24px; height:44px; box-shadow:0 0 0 1px rgba(91,206,255,.4),0 4px 14px rgba(0,87,255,.3); }
+.nav-links a.active::after { display:none; }
+.page { width:min(1480px,92%); margin:32px auto 48px; padding:0; }
+.account-heading { text-align:center; color:#071b53; margin:20px auto 30px; }
+.account-heading-icon { font-size:54px; line-height:1; margin-bottom:4px; font-weight:300; }
+.account-heading h1 { font-size:clamp(32px,3vw,46px); font-weight:800; letter-spacing:-1px; margin:0; }
+.account-heading p { margin-top:8px; font-size:19px; color:#10275c; }
+.glass { background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(239,246,255,.65)); border:1px solid rgba(130,180,255,.45); box-shadow:0 10px 24px rgba(29,101,202,.16),inset 0 1px 0 rgba(255,255,255,.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+.profile-header { border-radius:28px; padding:24px 42px; min-height:164px; margin-bottom:16px; }
+.avatar { width:120px; height:120px; border-radius:50%; background:linear-gradient(135deg,#073b82,#05255e); color:white; font-size:54px; font-weight:800; box-shadow:0 8px 20px rgba(0,51,132,.18); }
+.profile-left { gap:28px; }
+.profile-details h1 { color:#071b53; font-size:34px; letter-spacing:-.6px; }
+.profile-details p { color:#142b5e; font-size:18px; }
+.member-badge { background:#d9ffec; border:1px solid #20c98a; color:#064c3d; border-radius:24px; padding:8px 16px; margin-top:10px; font-weight:750; }
+.edit-profile-button { background:#d8e8ff; color:#034fdb; border:0; border-radius:16px; padding:18px 24px; font-weight:800; font-size:17px; box-shadow:none; }
+.main-grid { grid-template-columns:minmax(0,1.65fr) minmax(0,1fr); gap:16px; align-items:stretch; }
+.information-panel,.booking-panel,.security-panel,.account-management { border-radius:24px; padding:22px 24px; }
+.panel-title { color:#071b53; font-size:26px; font-weight:800; margin-bottom:16px; }
+.info-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.info-box { min-width:0; border:0; border-radius:16px; padding:14px 16px; background:linear-gradient(135deg,rgba(224,237,255,.72),rgba(230,241,255,.54)); min-height:76px; }
+.info-icon { width:56px; height:56px; border-radius:15px; background:linear-gradient(135deg,#dceaff,#c5ddff); color:#075eff; font-size:28px; }
+.info-content { min-width:0; }
+.info-label { color:#19315f; font-size:14px; font-weight:650; }
+.info-value { color:#08265c; font-size:17px; font-weight:750; overflow-wrap:anywhere; }
+.right-column { flex-direction:column; gap:14px; }
+.booking-panel,.security-panel { margin:0; }
+.booking-preview { border-radius:16px; background:linear-gradient(135deg,rgba(225,237,255,.8),rgba(233,243,255,.6)); border:0; padding:14px 16px; }
+.booking-top { gap:18px; }
+.booking-icon { width:70px; height:56px; border-radius:14px; background:#d6e8ff; color:#075eff; font-size:30px; }
+.booking-label { color:#16305f; font-weight:700; }
+.booking-route { color:#071b53; font-weight:800; font-size:17px; }
+.view-bookings-button { width:100%; margin-top:12px; border-radius:16px; background:linear-gradient(90deg,#00b8f7,#075aff); color:white; border:0; padding:16px; font-weight:800; font-size:18px; box-shadow:none; }
+.security-button { border:0; border-radius:16px; background:linear-gradient(135deg,rgba(225,237,255,.8),rgba(232,242,255,.65)); color:#09255d; padding:16px 18px; width:100%; text-align:left; font-size:17px; font-weight:800; }
+.account-management { margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.management-title { color:#071b53; font-size:26px; font-weight:800; }
+.management-description { color:#18305f; font-size:17px; }
+.management-buttons { gap:14px; }
+.logout-button,.delete-button { border-radius:16px; padding:15px 24px; font-weight:800; font-size:16px; }
+.logout-button { border:1.5px solid #075eff; color:#08255c; background:#e5efff; }
+.delete-button { border:1.5px solid #ff4c4c; color:#c21e1e; background:#fff0f0; }
+#editProfileForm,#changePasswordForm { margin-top:18px; }
+.form-grid,.password-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.form-group label { color:#16305f; }
+.form-group input,.form-group select { border-radius:12px; border:1px solid #b8d2f5; background:#f8fbff; color:#09255d; padding:12px; }
+@media(max-width:900px){ .main-grid{grid-template-columns:1fr;} .profile-header{padding:22px;flex-wrap:wrap;} .account-management{flex-wrap:wrap;} }
+@media(max-width:600px){ .navbar{padding:0 16px;height:62px;} .logo{font-size:21px;} .nav-links{gap:8px;} .nav-links a{font-size:12px;} .nav-links a.active{padding:0 10px;height:36px;} .page{width:94%;margin:22px auto;} .account-heading h1{font-size:32px;} .account-heading p{font-size:15px;} .profile-left{gap:14px;} .avatar{width:76px;height:76px;font-size:36px;} .profile-details h1{font-size:24px;} .profile-details p{font-size:14px;word-break:break-word;} .info-grid{grid-template-columns:1fr;} .account-management{padding:18px;} .management-buttons{width:100%;flex-direction:column;} .logout-button,.delete-button{width:100%;} }
+
+/* Heading selector correction for account.html */
+.account-page-heading { text-align:center; margin:0 0 30px; color:#071b53; }
+.account-page-heading i { width:38px; height:38px; stroke-width:2; color:#075eff; margin-bottom:8px; }
+.account-page-heading h1 { font-size:clamp(26px,3vw,38px); font-weight:800; margin-bottom:8px; color:#071b53; }
+.account-page-heading p { color:#10275c; font-size:16px; }
+/* Consistent Lucide sizing and alignment */
+.navbar i, .panel-title i, .account-page-heading i, .edit-profile-button i, .info-icon i, .booking-icon i, .security-button i, .management-title i, .logout-button i, .delete-button i { display:inline-flex; vertical-align:middle; flex-shrink:0; stroke-width:2; }
+.info-icon i { width:26px; height:26px; }
+.panel-title i { width:28px; height:28px; margin-right:8px; color:#075eff; }
+.navbar i { width:22px; height:22px; margin-right:7px; }
+.edit-profile-button i, .security-button i, .logout-button i, .delete-button i { width:20px; height:20px; }
+
+
+/* =====================================================
+   ACCOUNT PAGE NAVBAR / SPACING / SHARED FOOTER FIX
+===================================================== */
+.navbar {
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  min-height:68px; height:auto; padding:10px clamp(18px,5.2vw,86px);
+}
+.navbar .logo { flex:0 0 auto; white-space:nowrap; }
+.nav-links { display:flex; align-items:center; justify-content:center; flex-wrap:nowrap; gap:clamp(12px,2.4vw,36px); min-width:0; }
+.nav-links a { display:inline-flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap; text-decoration:none; line-height:1; }
+.nav-links a i { margin:0; }
+.page { width:min(1480px,92%); margin:28px auto 52px; padding:0 0 10px; }
+.account-page-heading { padding:4px 12px 0; }
+.main-grid { min-width:0; }
+.information-panel,.booking-panel,.security-panel,.account-management { min-width:0; }
+.info-box,.info-content,.info-value { min-width:0; }
+.management-buttons { display:flex; align-items:center; justify-content:flex-end; gap:14px; flex-wrap:wrap; }
+.logout-button,.delete-button { display:inline-flex; align-items:center; justify-content:center; gap:10px; white-space:nowrap; line-height:1.2; }
+.account-footer { width:100%; margin-top:28px; background:linear-gradient(110deg,#062452,#071b3e); color:#fff; text-align:center; padding:24px 16px 20px; border-top:1px solid rgba(255,255,255,.15); }
+.account-footer .footer-logo { display:flex; align-items:center; justify-content:center; gap:9px; color:#fff; font-size:18px; font-weight:800; margin-bottom:8px; }
+.account-footer .footer-logo i { width:22px; height:22px; stroke-width:2; }
+.account-footer p { color:#c3d1e5; font-size:12px; margin:0; }
+.account-footer .footer-links { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:10px; font-size:12px; }
+.account-footer .footer-links a { color:#dbeafe; text-decoration:none; }
+.account-footer .footer-links a:hover { color:#70c7ff; }
+@media(max-width:900px) {
+  .navbar { gap:12px; padding-left:18px; padding-right:18px; }
+  .nav-links { gap:10px; }
+  .nav-links a { font-size:13px; }
+  .nav-links a.active { padding:0 14px; }
+  .account-management { align-items:flex-start; }
+  .management-buttons { justify-content:flex-start; }
+}
+@media(max-width:600px) {
+  .navbar { min-height:62px; height:62px; padding:0 12px; gap:8px; }
+  .logo { font-size:19px; gap:7px; }
+  .logo .logo-icon i { width:22px; height:22px; }
+  .nav-links { gap:4px; }
+  .nav-links a { font-size:11px; padding:0 4px; gap:4px; }
+  .nav-links a i { width:16px; height:16px; margin:0; }
+  .nav-links a.active { height:34px; padding:0 8px; }
+  .page { width:calc(100% - 24px); margin:20px auto 34px; padding-bottom:8px; }
+  .account-page-heading { margin-bottom:22px; }
+  .account-management { gap:14px; }
+  .management-buttons { gap:10px; }
+  .logout-button,.delete-button { gap:8px; }
+  .account-footer { margin-top:20px; padding:20px 12px; }
+}
+
+/* FINAL ACCOUNT PAGE PADDING BALANCE */
+.page {
+  width: min(1480px, 92%);
+  margin: 28px auto 56px;
+  padding: 10px 0 24px;
+}
+.account-page-heading { margin: 0 0 30px; padding: 8px 12px 0; }
+.profile-header { margin-bottom: 20px; padding: 26px 42px; }
+.main-grid { gap: 18px; }
+.information-panel, .booking-panel, .security-panel { padding: 26px 28px; }
+.account-management { margin-top: 20px; padding: 26px 30px; }
+.account-footer { margin-top: 30px; }
+@media (max-width: 900px) {
+  .page { width: 94%; margin: 24px auto 42px; padding: 8px 0 20px; }
+  .profile-header { margin-bottom: 18px; padding: 22px; }
+  .information-panel, .booking-panel, .security-panel { padding: 22px; }
+  .account-management { margin-top: 18px; padding: 22px; }
+}
+@media (max-width: 600px) {
+  .page { width: calc(100% - 24px); margin: 18px auto 32px; padding: 6px 0 16px; }
+  .account-page-heading { margin-bottom: 20px; padding: 4px 8px 0; }
+  .profile-header { margin-bottom: 14px; padding: 18px; }
+  .information-panel, .booking-panel, .security-panel { padding: 16px; }
+  .account-management { margin-top: 14px; padding: 18px; }
+  .account-footer { margin-top: 18px; }
+}
+
+/* RIGHT COLUMN WIDTH / OVERFLOW FIX */
+*, *::before, *::after { box-sizing: border-box; }
+.main-grid {
+  width: 100%;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+.main-grid > *, .right-column, .booking-panel, .security-panel,
+.booking-preview, .booking-top, .security-button {
+  min-width: 0;
+  max-width: 100%;
+}
+.right-column { width: 100%; }
+.booking-panel, .security-panel { width: 100%; overflow: hidden; }
+.booking-preview { width: 100%; }
+.booking-top { display: flex; align-items: center; flex-wrap: nowrap; }
+.booking-top > * { min-width: 0; }
+.booking-route, .booking-label { overflow-wrap: anywhere; }
+.view-bookings-button, .security-button { box-sizing: border-box; max-width: 100%; }
+@media (max-width: 900px) {
+  .main-grid { grid-template-columns: minmax(0, 1fr); }
+  .right-column { width: 100%; }
+  .booking-panel, .security-panel { width: 100%; }
+}
+@media (max-width: 600px) {
+  .booking-top { gap: 12px; }
+  .booking-route { font-size: 15px; }
+  .booking-preview, .security-button { padding-left: 12px; padding-right: 12px; }
+}
+
+/* FINAL FIX: keep action-button icons and labels centered as a single row */
+.view-bookings-button,
+.security-button {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-align: center !important;
+  line-height: 1.25 !important;
+  min-height: 52px;
+  height: auto;
+  overflow: hidden;
+  white-space: normal;
+}
+.view-bookings-button > i,
+.security-button > i,
+.view-bookings-button > svg,
+.security-button > svg {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+.view-bookings-button { padding: 12px 16px !important; }
+.security-button { padding: 12px 16px !important; }
+.view-bookings-button:hover,
+.security-button:hover { transform: translateY(-1px); }
+
+/* SHARED-STYLE NAVBAR AND REFERENCE FOOTER */
+.navbar { position:relative; z-index:20; }
+.nav-links a { transition:color .2s ease, background .2s ease, transform .2s ease; }
+.nav-links a:not(.active):hover { color:#70c7ff; transform:translateY(-1px); }
+.nav-links a.active { display:inline-flex; align-items:center; justify-content:center; }
+.account-footer { width:calc(100% - 12px); margin:30px 6px 6px; padding:34px clamp(20px,5.5vw,90px) 26px; background:linear-gradient(110deg,#062452,#071b3e); color:#fff; text-align:center; border:1px solid rgba(255,255,255,.12); border-radius:14px; box-shadow:0 10px 24px rgba(2,24,61,.16); }
+.account-footer .footer-brand { display:flex; flex-direction:column; align-items:center; }
+.account-footer .footer-logo { display:flex; align-items:center; justify-content:center; gap:12px; margin:0; color:#fff; font-size:clamp(26px,3vw,42px); font-weight:800; }
+.account-footer .footer-logo i { width:34px; height:34px; stroke-width:2; }
+.account-footer .footer-tagline { color:#e1ebff; font-size:clamp(14px,1.3vw,18px); margin:8px 0 0; }
+.account-footer .footer-divider { width:100%; height:1px; background:rgba(210,226,255,.35); margin:24px 0 18px; }
+.account-footer .footer-bottom { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; text-align:left; }
+.account-footer .footer-copyright { color:#dbe7f9; font-size:clamp(12px,1.2vw,16px); margin:0; }
+.account-footer .footer-links { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:14px; margin:0; font-size:clamp(12px,1.2vw,16px); }
+.account-footer .footer-links a { color:#e5efff; text-decoration:none; transition:color .2s ease; }
+.account-footer .footer-links a:hover { color:#7acbff; }
+@media(max-width:650px) {
+ .account-footer { padding:26px 16px 20px; margin-top:22px; }
+ .account-footer .footer-logo { font-size:25px; }
+ .account-footer .footer-logo i { width:28px;height:28px; }
+ .account-footer .footer-divider { margin:18px 0 14px; }
+ .account-footer .footer-bottom { justify-content:center; text-align:center; gap:12px; }
+ .account-footer .footer-links { justify-content:center; gap:9px; }
+}
+
+/* Reference-style YatraSetu navbar (account page) */
+.account-nav-reference {
+  background: #fff !important; color: #071b5d !important;
+  min-height: 108px; height: 108px; padding: 0 clamp(24px, 6.5vw, 130px) !important;
+  display: flex; align-items: center; justify-content: space-between; gap: clamp(20px, 4vw, 64px);
+  box-shadow: none !important; border-bottom: 1px solid rgba(8, 40, 120, .08);
+}
+.account-nav-reference .logo { color: #092260 !important; font-size: 38px !important; font-weight: 800; gap: 14px; }
+.account-nav-reference .logo-icon { display: inline-flex; align-items: center; justify-content: center; }
+.account-nav-reference .logo-icon i { width: 42px !important; height: 42px !important; stroke: #092260; stroke-width: 2.2; margin: 0 !important; }
+.account-nav-reference .logo-wordmark { display: inline-flex; color: #092260 !important; }
+.account-nav-reference .logo-wordmark span:last-child { color: #18a9e8 !important; }
+.account-nav-reference .nav-links { justify-content: flex-end; gap: clamp(18px, 3.2vw, 48px); }
+.account-nav-reference .nav-links a { color: #092260 !important; font-size: 23px; font-weight: 700; padding: 0 3px; gap: 12px; transition: color .2s ease, transform .2s ease, background .2s ease; }
+.account-nav-reference .nav-links a i { width: 34px !important; height: 34px !important; stroke: #092260; stroke-width: 2.1; margin: 0 !important; }
+.account-nav-reference .nav-links a:hover { color: #078ce9 !important; transform: translateY(-1px); }
+.account-nav-reference .nav-links a:hover i { stroke: #078ce9; }
+.account-nav-reference .nav-links a.active { background: #fff !important; color: #092260 !important; border: 1px solid #d4e1ff; border-radius: 28px; height: 54px; padding: 0 30px; box-shadow: none !important; }
+.account-nav-reference .nav-links a.active i { stroke: #092260; }
+@media (max-width: 1050px) {
+ .account-nav-reference { height: auto; min-height: 92px; padding: 18px 24px !important; flex-wrap: wrap; }
+ .account-nav-reference .logo { font-size: 30px !important; }
+ .account-nav-reference .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 16px 24px; }
+ .account-nav-reference .nav-links a { font-size: 17px; }
+ .account-nav-reference .nav-links a i { width: 24px !important; height: 24px !important; }
+ .account-nav-reference .nav-links a.active { height: 44px; padding: 0 20px; }
+}
+@media (max-width: 600px) {
+ .account-nav-reference { padding: 14px 16px !important; gap: 12px; }
+ .account-nav-reference .logo { font-size: 24px !important; gap: 8px; }
+ .account-nav-reference .logo-icon i { width: 30px !important; height: 30px !important; }
+ .account-nav-reference .nav-links { gap: 8px; justify-content: space-between; }
+ .account-nav-reference .nav-links a { font-size: 12px; gap: 4px; padding: 4px; }
+ .account-nav-reference .nav-links a i { width: 16px !important; height: 16px !important; }
+ .account-nav-reference .nav-links a.active { height: 34px; padding: 0 8px; border-radius: 20px; }
+}
+
+/* COMPACT NAVBAR SIZE OVERRIDE - latest sizing fix */
+.account-nav-reference {
+  min-height: 76px !important;
+  height: 76px !important;
+  padding: 0 clamp(22px, 4.2vw, 64px) !important;
+  gap: clamp(14px, 2.5vw, 34px) !important;
+}
+.account-nav-reference .logo {
+  font-size: 25px !important;
+  gap: 9px !important;
+}
+.account-nav-reference .logo-icon i {
+  width: 30px !important;
+  height: 30px !important;
+}
+.account-nav-reference .nav-links {
+  gap: clamp(14px, 2vw, 28px) !important;
+}
+.account-nav-reference .nav-links a {
+  font-size: 15px !important;
+  gap: 7px !important;
+  padding: 0 2px !important;
+}
+.account-nav-reference .nav-links a i {
+  width: 19px !important;
+  height: 19px !important;
+}
+.account-nav-reference .nav-links a.active {
+  height: 38px !important;
+  padding: 0 16px !important;
+  border-radius: 22px !important;
+}
+@media (max-width: 1050px) {
+  .account-nav-reference {
+    min-height: 70px !important;
+    height: auto !important;
+    padding: 12px 22px !important;
+    gap: 12px !important;
+  }
+  .account-nav-reference .logo { font-size: 24px !important; }
+  .account-nav-reference .logo-icon i { width: 28px !important; height: 28px !important; }
+  .account-nav-reference .nav-links { gap: 10px 18px !important; }
+  .account-nav-reference .nav-links a { font-size: 14px !important; }
+  .account-nav-reference .nav-links a i { width: 18px !important; height: 18px !important; }
+  .account-nav-reference .nav-links a.active { height: 36px !important; padding: 0 14px !important; }
+}
+@media (max-width: 600px) {
+  .account-nav-reference { padding: 10px 14px !important; gap: 8px !important; }
+  .account-nav-reference .logo { font-size: 21px !important; gap: 6px !important; }
+  .account-nav-reference .logo-icon i { width: 24px !important; height: 24px !important; }
+  .account-nav-reference .nav-links { gap: 4px !important; }
+  .account-nav-reference .nav-links a { font-size: 11px !important; gap: 3px !important; padding: 3px 4px !important; }
+  .account-nav-reference .nav-links a i { width: 14px !important; height: 14px !important; }
+  .account-nav-reference .nav-links a.active { height: 30px !important; padding: 0 7px !important; border-radius: 16px !important; }
+}
+
+/* FINAL NAVBAR FIX — match the homepage navbar sizing and branding */
+.account-nav-reference {
+  min-height: 72px !important;
+  height: 72px !important;
+  padding: 0 6.5% !important;
+  gap: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  box-sizing: border-box !important;
+}
+.account-nav-reference > .logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+.account-nav-reference .logo-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+  margin: 0 !important;
+}
+.account-nav-reference .logo-icon i {
+  width: 30px !important;
+  height: 30px !important;
+  color: #0b1f55 !important;
+  stroke-width: 2.2 !important;
+}
+.account-nav-reference .logo-wordmark {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 0 !important;
+  white-space: nowrap !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.7px !important;
+  line-height: 1 !important;
+  color: #0b1f55 !important;
+}
+.account-nav-reference .logo-wordmark span {
+  display: inline !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: #0b1f55 !important;
+}
+.account-nav-reference .logo-wordmark span:last-child { color: #19a8e9 !important; }
+.account-nav-reference .nav-links {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex: 0 1 auto !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+}
+.account-nav-reference .nav-links a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 10px 13px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  color: #0b1f55 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+.account-nav-reference .nav-links a i {
+  display: inline-flex !important;
+  width: 20px !important;
+  height: 20px !important;
+  flex: 0 0 20px !important;
+  margin: 0 !important;
+  color: currentColor !important;
+  stroke-width: 2 !important;
+}
+.account-nav-reference .nav-links a:hover {
+  color: #0756e8 !important;
+  background: #edf4ff !important;
+}
+.account-nav-reference .nav-links a.active {
+  color: #0756e8 !important;
+  background: #edf4ff !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 10px 13px !important;
+}
+.account-nav-reference .nav-links a.active::after { display: none !important; }
+@media (max-width: 900px) {
+  .account-nav-reference { padding: 0 3% !important; gap: 12px !important; }
+  .account-nav-reference .nav-links { gap: 4px !important; }
+  .account-nav-reference .nav-links a { padding: 8px !important; font-size: 14px !important; }
+  .account-nav-reference .logo-wordmark { font-size: 24px !important; }
+}
+@media (max-width: 680px) {
+  .account-nav-reference {
+    height: auto !important;
+    min-height: 72px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    padding: 12px 4% !important;
+  }
+  .account-nav-reference .nav-links {
+    order: 3 !important;
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+  .account-nav-reference .nav-links a { font-size: 13px !important; }
+}
+
+/* FINAL NAVBAR ALIGNMENT: logo left, primary links centered, account on right */
+@media (min-width: 901px) {
+  .account-nav-reference {
+    display: grid !important;
+    grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr) !important;
+    align-items: center !important;
+    height: 76px !important;
+    min-height: 76px !important;
+    padding: 0 clamp(32px, 6vw, 100px) !important;
+    gap: 0 !important;
+  }
+  .account-nav-reference > .logo {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+  }
+  .account-nav-reference .logo-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .account-nav-reference .logo-icon i {
+    display: block !important;
+    width: 30px !important;
+    height: 30px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .account-nav-reference .nav-links {
+    grid-column: 2 / 4 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(12px, 1.5vw, 24px) !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .account-nav-reference .nav-links a {
+    font-size: 16px !important;
+    padding: 9px 12px !important;
+  }
+  .account-nav-reference .nav-links a:last-child {
+    margin-left: auto !important;
+  }
+}
+
+/* ACTUAL FIX: centered primary navigation + independent My Account button */
+@media (min-width: 901px) {
+  .account-nav-reference {
+    position: relative !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 76px !important;
+    min-height: 76px !important;
+    padding: 0 3.5vw !important;
+    gap: 0 !important;
+  }
+  .account-nav-reference > .logo {
+    position: relative !important;
+    z-index: 2 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+    font-size: 28px !important;
+  }
+  .account-nav-reference .logo-icon,
+  .account-nav-reference .logo-icon i,
+  .account-nav-reference .logo-icon svg {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 30px !important;
+    height: 30px !important;
+    flex: 0 0 30px !important;
+    color: #092260 !important;
+    stroke: #092260 !important;
+  }
+  .account-nav-reference .nav-links {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: clamp(14px, 1.8vw, 30px) !important;
+    white-space: nowrap !important;
+  }
+  .account-nav-reference .nav-links a:not(:last-child) {
+    position: static !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    padding: 10px 8px !important;
+  }
+  .account-nav-reference .nav-links a:last-child {
+    position: absolute !important;
+    left: calc(50% + 390px) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    padding: 10px 18px !important;
+  }
+}
+@media (max-width: 1200px) and (min-width: 901px) {
+  .account-nav-reference .nav-links { gap: 8px !important; }
+  .account-nav-reference .nav-links a:last-child { left: calc(50% + 330px) !important; }
+  .account-nav-reference .nav-links a:not(:last-child) { font-size: 14px !important; padding: 8px 5px !important; }
+}

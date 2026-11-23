@@ -1,357 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | YatraSetu</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
-    <style>
-
-        body {
-            min-height: 100vh;
-            background:
-                linear-gradient(
-                    135deg,
-                    #eef5ff,
-                    #f8faff,
-                    #eef9f7
-                );
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-page {
-            flex: 1;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 40px 20px;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 430px;
-
-            background: white;
-
-            padding: 40px;
-
-            border-radius: 20px;
-
-            box-shadow:
-                0 20px 60px
-                rgba(37, 60, 100, 0.15);
-
-            border: 1px solid #edf0f5;
-        }
-
-        .login-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-logo .train {
-            font-size: 45px;
-            margin-bottom: 10px;
-        }
-
-        .login-logo h1 {
-            font-size: 28px;
-            color: #15284b;
-        }
-
-        .login-logo span {
-            color: #246bfd;
-        }
-
-        .login-logo p {
-            margin-top: 8px;
-            color: #7b8495;
-            font-size: 14px;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .login-form label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #59667a;
-            margin-bottom: -10px;
-        }
-
-        .login-form input {
-            height: 50px;
-
-            border: 1px solid #dce1e9;
-
-            border-radius: 9px;
-
-            padding: 0 15px;
-
-            font-size: 14px;
-
-            outline: none;
-        }
-
-        .login-form input:focus {
-            border-color: #246bfd;
-        }
-
-        .login-button {
-            height: 50px;
-
-            margin-top: 5px;
-
-            border: none;
-
-            border-radius: 9px;
-
-            background: #246bfd;
-
-            color: white;
-
-            font-size: 15px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .login-button:hover {
-            background: #1556d8;
-        }
-
-        .login-message {
-            text-align: center;
-
-            font-size: 13px;
-
-            min-height: 18px;
-        }
-
-        .login-footer {
-            text-align: center;
-
-            margin-top: 25px;
-
-            color: #7b8495;
-
-            font-size: 14px;
-        }
-
-        .login-footer a {
-            color: #246bfd;
-
-            text-decoration: none;
-
-            font-weight: 700;
-        }
-
-        .back-home {
-            text-align: center;
-
-            margin-top: 20px;
-        }
-
-        .back-home a {
-            color: #647085;
-
-            text-decoration: none;
-
-            font-size: 13px;
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-    <!-- NAVBAR -->
-
-    <header class="navbar">
-
-        <div class="logo">
-            🚆 <span>YatraSetu</span>
-        </div>
-
-        <nav>
-            <a href="/">Home</a>
-            <a href="/#trains">Trains</a>
-            <a href="/#about">About</a>
-        </nav>
-
-        <div class="nav-buttons">
-
-            <a href="/login.html">
-                <button class="login-btn">
-                    Login
-                </button>
-            </a>
-
-            <button class="register-btn">
-                Register
-            </button>
-
-        </div>
-
+    <link rel="stylesheet" href="/css/auth.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="auth-body">
+    <header class="navbar booking-navbar auth-navbar">
+      <a class="logo booking-logo-clean" href="/" aria-label="YatraSetu Home"
+        ><i data-lucide="train-front" class="auth-icon"></i
+        ><span class="booking-logo-text">Yatra<span>Setu</span></span></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="/"><i data-lucide="house"></i> Home</a
+        ><a href="/#trains"><i data-lucide="train-front"></i> Trains</a
+        ><a href="/bookings.html"
+          ><i data-lucide="calendar-check"></i> My Bookings</a
+        ><a href="/#about"><i data-lucide="info"></i> About</a>
+      </nav>
+      <div class="nav-buttons">
+        <a class="auth-nav-account" href="/login.html"
+          ><i data-lucide="user-round"></i> My Account</a
+        >
+      </div>
     </header>
-
-
-    <!-- LOGIN -->
-
-    <main class="login-page">
-
-        <div class="login-card">
-
-            <div class="login-logo">
-
-                <div class="train">
-                    🚆
-                </div>
-
-                <h1>
-                    Welcome to
-                    <span>YatraSetu</span>
-                </h1>
-
-                <p>
-                    Login to continue your journey
-                </p>
-
-            </div>
-
-
-            <form
-                class="login-form"
-                id="loginForm">
-
-                <label for="email">
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required>
-
-
-                <label for="password">
-                    Password
-                </label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required>
-
-
-                <button
-                    type="submit"
-                    class="login-button">
-
-                    Login
-
-                </button>
-
-
-                <div
-                    id="loginMessage"
-                    class="login-message">
-                </div>
-
-            </form>
-
-
-            <div class="login-footer">
-
-                Don't have an account?
-
-                <a href="#">
-                    Register
-                </a>
-
-            </div>
-
-
-            <div class="back-home">
-
-                <a href="/">
-                    ← Back to Home
-                </a>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <footer>
-
-        <div class="footer-logo">
-            🚆 YatraSetu
-        </div>
-
-        <p>
-            © 2026 YatraSetu. Smart Railway Reservation.
+    <main class="auth-page auth-login-page">
+      <section class="auth-intro login-intro">
+        <div class="intro-eyebrow">WELCOME BACK</div>
+        <h1>Welcome Back to<br /><span>YatraSetu</span></h1>
+        <p class="intro-subtitle">
+          Your smart travel partner for trains, flights and buses.
         </p>
-
+        <div class="auth-feature-list">
+          <article class="auth-feature">
+            <div class="feature-icon"><i data-lucide="train-front"></i></div>
+            <div>
+              <h3>Book Tickets Easily</h3>
+              <p>Trains, Flights &amp; Buses in one place</p>
+            </div>
+          </article>
+          <article class="auth-feature">
+            <div class="feature-icon"><i data-lucide="zap"></i></div>
+            <div>
+              <h3>Instant Confirmation</h3>
+              <p>Quick, secure and reliable booking</p>
+            </div>
+          </article>
+          <article class="auth-feature">
+            <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <h3>Secure &amp; Trusted</h3>
+              <p>Your data and payments are safe</p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="auth-card login-card">
+        <div class="auth-logo">
+          <div class="auth-logo-icon"><i data-lucide="train-front"></i></div>
+          <h2>Login to <span>YatraSetu</span></h2>
+          <p>Access your bookings and manage your journeys</p>
+          <div class="auth-underline"></div>
+        </div>
+        <form class="auth-form" id="loginForm">
+          <label for="email"><i data-lucide="mail"></i> Email Address</label
+          ><input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          /><label for="password"
+            ><i data-lucide="lock-keyhole"></i> Password</label
+          >
+          <div class="password-field">
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            /><button
+              type="button"
+              class="password-toggle"
+              aria-label="Show password"
+            >
+              <i data-lucide="eye"></i>
+            </button>
+          </div>
+          <div class="auth-options">
+            <label class="remember-label"
+              ><input type="checkbox" /> Remember me</label
+            ><a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+          <button type="submit" class="auth-button">
+            <i data-lucide="log-in"></i> Login
+          </button>
+          <div id="loginMessage" class="auth-message"></div>
+        </form>
+        <div class="auth-footer">
+          Don't have an account? <a href="/register.html">Register</a>
+        </div>
+      </section>
+    </main>
+    <footer class="booking-footer auth-footer-site">
+      <div class="footer-brand">
+        <i data-lucide="train-front" class="auth-icon"></i>
+        <span>YatraSetu</span>
+      </div>
+      <p>Your journey, connected with convenience.</p>
+      <div class="footer-bottom">
+        <span>© 2026 YatraSetu. Smart Railway Reservation.</span>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a><span>|</span
+          ><a href="#">Terms &amp; Conditions</a><span>|</span
+          ><a href="#">Contact Us</a>
+        </div>
+      </div>
     </footer>
-
-
     <script>
+      if (window.lucide) lucide.createIcons();
+    </script>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", function(event) {
+          const email = document.getElementById("email").value.trim();
 
-                event.preventDefault();
+          const password = document.getElementById("password").value;
 
-                const email =
-                    document.getElementById("email").value;
+          const message = document.getElementById("loginMessage");
 
-                const password =
-                    document.getElementById("password").value;
+          message.textContent = "";
 
-                const message =
-                    document.getElementById("loginMessage");
+          // =========================
+          // VALIDATION
+          // =========================
 
+          if (!email || !password) {
+            message.textContent = "Please enter email and password.";
 
-                if (!email || !password) {
+            return;
+          }
 
-                    message.textContent =
-                        "Please enter email and password.";
+          try {
+            // =========================
+            // CALL LOGIN API
+            // =========================
 
-                    return;
-                }
+            const response = await fetch("/api/auth/login", {
+              method: "POST",
 
+              headers: {
+                "Content-Type": "application/json",
+              },
 
-                message.textContent =
-                    "Login system will be connected to the database next.";
+              body: JSON.stringify({
+                email: email,
 
+                password: password,
+              }),
             });
 
+            const data = await response.json();
+
+            // =========================
+            // LOGIN FAILED
+            // =========================
+
+            if (!response.ok) {
+              message.textContent =
+                data.message || "Invalid email or password.";
+
+              return;
+            }
+
+            // =========================
+            // LOGIN SUCCESSFUL
+            // =========================
+
+            localStorage.setItem("userId", data.userId);
+
+            localStorage.setItem("userName", data.name);
+
+            localStorage.setItem("userEmail", data.email);
+
+            message.textContent = "Login successful!";
+
+            // =========================
+            // REDIRECT HOME
+            // =========================
+
+            setTimeout(function () {
+              window.location.href = "/";
+            }, 800);
+          } catch (error) {
+            console.error("Login error:", error);
+
+            message.textContent = "Unable to connect to the server.";
+          }
+        });
     </script>
-
-</body>
-
+    <script src="/js/auth.js"></script>
+  </body>
 </html>

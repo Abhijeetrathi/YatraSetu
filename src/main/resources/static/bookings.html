@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Bookings - YatraSetu</title>
+
+    <link
+      rel="stylesheet"
+      href="css/bookings.css?v=navbar-account-logout-20261123"
+    />
+  </head>
+
+  <body>
+    <!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+
+    <header class="navbar homepage-navbar">
+      <a class="logo homepage-logo" href="/" aria-label="YatraSetu Home">
+        <i data-lucide="train-front" class="brand-train" aria-hidden="true"></i>
+        <span class="brand-name"><span>Yatra</span><span>Setu</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/" class="home-nav-link"><i data-lucide="house"></i>Home</a>
+        <a href="/#trains" class="home-nav-link"
+          ><i data-lucide="train-front"></i>Trains</a
+        >
+        <a href="/bookings.html" class="home-nav-link active"
+          ><i data-lucide="calendar-check"></i>My Bookings</a
+        >
+        <a href="/#about" class="home-nav-link"
+          ><i data-lucide="info"></i>About</a
+        >
+      </nav>
+      <div class="nav-buttons" id="navButtons">
+        <a href="/account.html" class="account-button" type="button"
+          >My Account</a
+        >
+        <button class="logout-btn" type="button" onclick="logoutUser()">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- =========================================================
+     MAIN
+     ========================================================= -->
+
+    <main class="page">
+      <div class="page-header">
+        <div class="icon page-title-icon">
+          <i data-lucide="ticket" aria-hidden="true"></i>
+        </div>
+
+        <h1>My Bookings</h1>
+
+        <p>View and manage your YatraSetu train tickets</p>
+      </div>
+
+      <div id="errorBox" class="error-box"></div>
+
+      <div id="loading" class="loading">
+        <div class="loading-icon">
+          <i data-lucide="loader-circle" aria-hidden="true"></i>
+        </div>
+
+        <h3>Loading your bookings...</h3>
+
+        <p style="margin-top: 8px">Please wait.</p>
+      </div>
+
+      <div id="emptyBox" class="empty-box">
+        <div class="empty-icon">
+          <i data-lucide="ticket" aria-hidden="true"></i>
+        </div>
+
+        <h2>No bookings yet</h2>
+
+        <p>You haven't booked any train tickets yet.</p>
+
+        <a href="/" class="search-button"> Search Trains </a>
+      </div>
+
+      <div class="booking-toolbar" id="bookingToolbar">
+        <div class="booking-filters">
+          <button class="booking-filter active" data-filter="all">
+            <i data-lucide="layers" aria-hidden="true"></i> All Bookings
+            <span class="filter-count" id="countAll">0</span>
+          </button>
+          <button class="booking-filter" data-filter="confirmed">
+            <i data-lucide="circle-check" aria-hidden="true"></i> Confirmed
+            <span class="filter-count" id="countConfirmed">0</span>
+          </button>
+          <button class="booking-filter" data-filter="cancelled">
+            <i data-lucide="circle-x" aria-hidden="true"></i> Cancelled
+            <span class="filter-count" id="countCancelled">0</span>
+          </button>
+          <button class="booking-filter" data-filter="upcoming">
+            <i data-lucide="calendar-check" aria-hidden="true"></i> Upcoming
+            <span class="filter-count" id="countUpcoming">0</span>
+          </button>
+        </div>
+        <div class="booking-search-wrap">
+          <span class="search-symbol"
+            ><i data-lucide="search" aria-hidden="true"></i
+          ></span>
+          <input
+            id="bookingSearch"
+            type="search"
+            placeholder="Search by PNR, train or route..."
+            aria-label="Search bookings"
+          />
+        </div>
+      </div>
+
+      <div id="bookingsContainer" class="bookings-container"></div>
+    </main>
+
+    <!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="footer-train" aria-hidden="true">🚆</span
+        ><span>YatraSetu</span>
+      </div>
+      <p class="footer-tagline">Your journey, connected with convenience.</p>
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2026 YatraSetu. Smart Railway Reservation.
+        </p>
+        <div class="footer-links">
+          <a href="#privacy">Privacy Policy</a><span aria-hidden="true">|</span>
+          <a href="#terms">Terms &amp; Conditions</a
+          ><span aria-hidden="true">|</span>
+          <a href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      async function logoutUser() {
+        try {
+          const response = await fetch("/api/auth/logout", { method: "POST" });
+          if (response.ok) {
+            localStorage.removeItem("userId");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("userEmail");
+            window.location.href = "/";
+          } else {
+            alert("Unable to logout. Please try again.");
+          }
+        } catch (error) {
+          console.error("Logout error:", error);
+          alert("Something went wrong while logging out.");
+        }
+      }
+      // =========================================================
+      // LOAD BOOKINGS
+      // =========================================================
+
+      async function loadBookings() {
+        const loading = document.getElementById("loading");
+
+        const container = document.getElementById("bookingsContainer");
+
+        const emptyBox = document.getElementById("emptyBox");
+
+        const errorBox = document.getElementById("errorBox");
+
+        loading.style.display = "block";
+
+        container.innerHTML = "";
+
+        emptyBox.style.display = "none";
+
+        errorBox.style.display = "none";
+
+        try {
+          const response = await fetch("/api/bookings", {
+            method: "GET",
+            credentials: "include",
+          });
+
+          if (response.status === 401) {
+            window.location.href = "/login.html";
+
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error("Unable to load bookings.");
+          }
+
+          const bookings = await response.json();
+
+          loading.style.display = "none";
+
+          if (!Array.isArray(bookings) || bookings.length === 0) {
+            emptyBox.style.display = "block";
+
+            return;
+          }
+
+          bookings.forEach((booking) => {
+            container.appendChild(createBookingCard(booking));
+            if (window.lucide) window.lucide.createIcons({ root: container });
+          });
+        } catch (error) {
+          console.error("Booking loading error:", error);
+
+          loading.style.display = "none";
+
+          errorBox.textContent =
+            "Unable to load your bookings. Please try again.";
+
+          errorBox.style.display = "block";
+        }
+      }
+
+      // =========================================================
+      // CREATE BOOKING CARD
+      // =========================================================
+
+      function createBookingCard(booking) {
+        const card = document.createElement("div");
+
+        card.className = "booking-card";
+
+        const train = booking.train || {};
+
+        const status = booking.status || "UNKNOWN";
+
+        const statusUpper = status.toUpperCase();
+
+        let statusClass = "status-other";
+
+        if (statusUpper === "CONFIRMED") {
+          statusClass = "status-confirmed";
+        } else if (statusUpper === "CANCELLED") {
+          statusClass = "status-cancelled";
+        }
+
+        const journeyDate = formatDate(
+          booking.journeyDate || train.journeyDate,
+        );
+
+        const departureTime = formatTime(train.departureTime);
+
+        const arrivalTime = formatTime(train.arrivalTime);
+
+        const passengers = Array.isArray(booking.passengers)
+          ? booking.passengers
+          : [];
+
+        /*
+         * A newly created booking is currently already
+         * CONFIRMED by the backend.
+         *
+         * We therefore show "Pay Now" only when a future
+         * booking status such as PAYMENT_PENDING exists.
+         */
+
+        const needsPayment =
+          statusUpper === "PAYMENT_PENDING" ||
+          statusUpper === "PENDING_PAYMENT";
+
+        card.innerHTML = `
+
+            <!-- TOP -->
+
+            <div class="booking-top">
+
+                <div class="pnr-section">
+
+                    <span class="pnr-label"><i data-lucide="ticket" aria-hidden="true"></i>
+                        PNR Number
+                    </span>
+
+                    <span class="pnr-number">
+                        ${escapeHtml(booking.pnr || "N/A")}
+                    </span>
+
+                </div>
+
+
+                <span class="status ${statusClass}">
+                    <i data-lucide="${statusUpper === "CONFIRMED" ? "circle-check" : statusUpper === "CANCELLED" ? "circle-x" : "circle-alert"}" aria-hidden="true"></i>
+                    ${escapeHtml(status)}
+                </span>
+
+            </div>
+
+
+            <!-- TRAIN -->
+
+            <div class="train-section">
+                <img class="booking-train-image" src="/images/booking-train.jpg" alt="Indian passenger train in scenic mountains" />
+                <div class="train-main">
+                    <div class="train-header">
+                        <div class="train-heading-left">
+                            <span class="train-heading-icon"><i data-lucide="train-front" aria-hidden="true"></i></span>
+                            <div>
+                                <div class="train-name">${escapeHtml(train.trainName || "Train")}</div>
+                                <div class="train-number">Train No: ${escapeHtml(train.trainNumber || "N/A")}</div>
+                            </div>
+                        </div>
+                        <div class="journey-date"><i data-lucide="calendar-days" aria-hidden="true"></i> Journey Date<strong>${escapeHtml(journeyDate)}</strong></div>
+                    </div>
+                    <div class="route">
+                        <div class="station">
+                            <span class="station-time">${escapeHtml(departureTime)}</span>
+                            <span class="station-name"><i data-lucide="map-pin" aria-hidden="true"></i> ${escapeHtml(train.source || "Source")}</span>
+                        </div>
+                        <div class="route-line"></div>
+                        <div class="station">
+                            <span class="station-time">${escapeHtml(arrivalTime)}</span>
+                            <span class="station-name"><i data-lucide="map-pin" aria-hidden="true"></i> ${escapeHtml(train.destination || "Destination")}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="booking-info">
+
+                <div class="info-item">
+
+                    <span class="info-label"><i data-lucide="armchair" aria-hidden="true"></i>
+                        Class
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHtml(booking.className || "-")}
+
+                        ${
+                          booking.classCode
+                            ? `(${escapeHtml(booking.classCode)})`
+                            : ""
+                        }
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label"><i data-lucide="users" aria-hidden="true"></i>
+                        Passengers
+                    </span>
+
+                    <span class="info-value">
+                        ${escapeHtml(
+                          String(booking.seatsBooked || passengers.length || 0),
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label"><i data-lucide="armchair" aria-hidden="true"></i>
+                        Seats
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHtml(booking.allocatedSeats || "-")}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label"><i data-lucide="clock" aria-hidden="true"></i>
+                        Booking Time
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHtml(formatDateTime(booking.bookingTime))}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSENGERS -->
+
+            ${
+              passengers.length > 0
+                ? `
+
+                    <div class="passengers-section">
+
+                        <div class="section-title"><i data-lucide="user-round" aria-hidden="true"></i>
+                            Passenger Details
+                        </div>
+
+
+                        <div class="passenger-list">
+
+                            ${passengers
+                              .map(
+                                (passenger, index) => `
+
+                                        <div
+                                            class="passenger-row"
+                                        >
+
+                                            <div
+                                                class="passenger-name"
+                                            >
+                                                ${index + 1}.
+                                                ${escapeHtml(
+                                                  passenger.passengerName ||
+                                                    "Passenger",
+                                                )}
+                                            </div>
+
+
+                                            <div
+                                                class="passenger-detail"
+                                            >
+                                                Age:
+                                                ${escapeHtml(
+                                                  String(
+                                                    passenger.passengerAge ??
+                                                      "-",
+                                                  ),
+                                                )}
+                                            </div>
+
+
+                                            <div
+                                                class="passenger-detail"
+                                            >
+                                                ${escapeHtml(
+                                                  passenger.passengerGender ||
+                                                    "-",
+                                                )}
+                                            </div>
+
+
+                                            <div>
+
+                                                <span
+                                                    class="seat-badge"
+                                                >
+                                                    ${escapeHtml(
+                                                      formatSeat(passenger),
+                                                    )}
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    `,
+                              )
+                              .join("")}
+
+                        </div>
+
+                    </div>
+
+                `
+                : ""
+            }
+
+
+            <!-- FARE -->
+
+            <div class="fare-section">
+
+                <div class="fare-box"><div class="fare-heading"><i data-lucide="wallet" aria-hidden="true"></i> Fare Details</div>
+
+                    <div class="fare-row">
+
+                        <span><i data-lucide="indian-rupee" aria-hidden="true"></i>
+                            Base Fare
+                        </span>
+
+                        <strong>
+                            ${formatCurrency(booking.baseFare)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fare-row">
+
+                        <span>
+                            GST (5%)
+                        </span>
+
+                        <strong>
+                            ${formatCurrency(booking.gstAmount)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fare-total">
+
+                        <span>
+                            Total Fare
+                        </span>
+
+                        <span>
+                            ${formatCurrency(booking.totalFare)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="booking-actions">
+
+
+                ${
+                  needsPayment
+                    ? `
+
+                        <a
+                            class="action-button pay-now-button"
+                            href="/payment.html?bookingId=${encodeURIComponent(
+                              booking.id,
+                            )}"
+                        >
+                            💳 Pay Now
+                        </a>
+
+                    `
+                    : ""
+                }
+
+
+                <a
+                    class="action-button view-ticket-button"
+                    href="/ticket.html?bookingId=${encodeURIComponent(
+                      booking.id,
+                    )}"
+                >
+                    <i data-lucide="ticket" aria-hidden="true"></i> View Ticket
+                </a>
+
+
+                ${
+                  statusUpper === "CANCELLED"
+                    ? `
+
+                        <span
+                            class="cancelled-message"
+                        >
+                            This booking has been cancelled.
+                        </span>
+
+                    `
+                    : `
+
+                        <button
+                            type="button"
+                            class="action-button cancel-booking-button"
+                            onclick="cancelBooking(
+                                ${booking.id},
+                                '${escapeForAttribute(booking.pnr || "")}'
+                            )"
+                        >
+                            <i data-lucide="x" aria-hidden="true"></i> Cancel Booking
+                        </button>
+
+                    `
+                }
+
+            </div>
+
+        `;
+
+        return card;
+      }
+
+      // =========================================================
+      // CANCEL BOOKING
+      // =========================================================
+
+      async function cancelBooking(bookingId, pnr) {
+        const confirmation = confirm(
+          "Are you sure you want to cancel booking PNR " +
+            pnr +
+            "?\n\n" +
+            "The allocated seats will be released.",
+        );
+
+        if (!confirmation) {
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            "/api/bookings/" + encodeURIComponent(bookingId),
+            {
+              method: "DELETE",
+
+              credentials: "include",
+            },
+          );
+
+          const data = await response.json();
+
+          if (response.status === 401) {
+            window.location.href = "/login.html";
+
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error(data.message || "Unable to cancel booking.");
+          }
+
+          alert(data.message || "Booking cancelled successfully.");
+
+          loadBookings();
+        } catch (error) {
+          console.error("Cancellation error:", error);
+
+          alert(error.message || "Unable to cancel booking.");
+        }
+      }
+
+      // =========================================================
+      // FORMAT DATE
+      // =========================================================
+
+      function formatDate(value) {
+        if (!value) {
+          return "-";
+        }
+
+        try {
+          const date = new Date(value);
+
+          if (isNaN(date.getTime())) {
+            return String(value);
+          }
+
+          return date.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+        } catch (error) {
+          return String(value);
+        }
+      }
+
+      // =========================================================
+      // FORMAT TIME
+      // =========================================================
+
+      function formatTime(value) {
+        if (!value) {
+          return "-";
+        }
+
+        if (
+          typeof value === "string" &&
+          value.includes(":") &&
+          !value.includes("T")
+        ) {
+          const parts = value.split(":");
+
+          if (parts.length >= 2) {
+            let hour = parseInt(parts[0], 10);
+
+            const minute = parts[1];
+
+            if (isNaN(hour)) {
+              return value;
+            }
+
+            const suffix = hour >= 12 ? "PM" : "AM";
+
+            hour = hour % 12 || 12;
+
+            return hour + ":" + minute + " " + suffix;
+          }
+        }
+
+        try {
+          const date = new Date(value);
+
+          if (isNaN(date.getTime())) {
+            return String(value);
+          }
+
+          return date.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          });
+        } catch (error) {
+          return String(value);
+        }
+      }
+
+      // =========================================================
+      // FORMAT DATE + TIME
+      // =========================================================
+
+      function formatDateTime(value) {
+        if (!value) {
+          return "-";
+        }
+
+        try {
+          const date = new Date(value);
+
+          if (isNaN(date.getTime())) {
+            return String(value);
+          }
+
+          return (
+            date.toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }) +
+            " " +
+            date.toLocaleTimeString("en-IN", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })
+          );
+        } catch (error) {
+          return String(value);
+        }
+      }
+
+      // =========================================================
+      // FORMAT CURRENCY
+      // =========================================================
+
+      function formatCurrency(value) {
+        const amount = Number(value);
+
+        if (value === null || value === undefined || isNaN(amount)) {
+          return "₹0.00";
+        }
+
+        return "₹" + amount.toFixed(2);
+      }
+
+      // =========================================================
+      // FORMAT SEAT
+      // =========================================================
+
+      function formatSeat(passenger) {
+        const coach = passenger.coach || "";
+
+        const number = passenger.seatNumber || "";
+
+        const type = passenger.seatType || "";
+
+        let result = "";
+
+        if (coach) {
+          result += coach + "-";
+        }
+
+        result += number;
+
+        if (type) {
+          result += " (" + type + ")";
+        }
+
+        return result || "Seat not assigned";
+      }
+
+      // =========================================================
+      // ESCAPE HTML
+      // =========================================================
+
+      function escapeHtml(value) {
+        if (value === null || value === undefined) {
+          return "";
+        }
+
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // =========================================================
+      // ESCAPE ATTRIBUTE
+      // =========================================================
+
+      function escapeForAttribute(value) {
+        if (value === null || value === undefined) {
+          return "";
+        }
+
+        return String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      }
+
+      // =========================================================
+      // START
+      // =========================================================
+
+      document.addEventListener("DOMContentLoaded", function () {
+        loadBookings();
+      });
+
+      // Booking filters and search (presentation only; original booking actions remain unchanged)
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("bookingsContainer");
+        const search = document.getElementById("bookingSearch");
+        const buttons = document.querySelectorAll(".booking-filter");
+        let activeFilter = "all";
+        function updateFilters() {
+          const cards = Array.from(container.querySelectorAll(".booking-card"));
+          const query = (search?.value || "").trim().toLowerCase();
+          let confirmed = 0,
+            cancelled = 0,
+            upcoming = 0;
+          cards.forEach((card) => {
+            const isCancelled =
+              card.querySelector(".status-cancelled") !== null;
+            const isConfirmed =
+              card.querySelector(".status-confirmed") !== null;
+            if (isConfirmed) confirmed++;
+            if (isCancelled) cancelled++;
+            if (isConfirmed) upcoming++;
+            const textMatch = card.textContent.toLowerCase().includes(query);
+            const filterMatch =
+              activeFilter === "all" ||
+              (activeFilter === "confirmed" && isConfirmed) ||
+              (activeFilter === "cancelled" && isCancelled) ||
+              (activeFilter === "upcoming" && isConfirmed);
+            card.style.display = textMatch && filterMatch ? "" : "none";
+          });
+          document.getElementById("countAll").textContent = cards.length;
+          document.getElementById("countConfirmed").textContent = confirmed;
+          document.getElementById("countCancelled").textContent = cancelled;
+          document.getElementById("countUpcoming").textContent = upcoming;
+        }
+        buttons.forEach((button) =>
+          button.addEventListener("click", () => {
+            buttons.forEach((b) => b.classList.remove("active"));
+            button.classList.add("active");
+            activeFilter = button.dataset.filter || "all";
+            updateFilters();
+          }),
+        );
+        search?.addEventListener("input", updateFilters);
+        new MutationObserver(updateFilters).observe(container, {
+          childList: true,
+        });
+        updateFilters();
+      });
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      if (window.lucide) lucide.createIcons();
+    </script>
+  </body>
+</html>

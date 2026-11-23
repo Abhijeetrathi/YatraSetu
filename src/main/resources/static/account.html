@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>YatraSetu Account | Indian Railways</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/css/account.css" />
+</head>
+
+  <body>
+    <!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+    <div class="background"></div>
+
+    <div class="background-overlay"></div>
+
+    <!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+    <nav class="navbar account-nav-reference">
+      <a href="/" class="logo" aria-label="YatraSetu Home">
+        <span class="logo-icon"><i data-lucide="train-front" aria-hidden="true"></i></span>
+        <span class="logo-wordmark"><span>Yatra</span><span>Setu</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/" ><i data-lucide="house" aria-hidden="true"></i> Home</a>
+        <a href="/trains.html"><i data-lucide="train-front" aria-hidden="true"></i> Trains</a>
+        <a href="/bookings.html"><i data-lucide="calendar-check" aria-hidden="true"></i> My Bookings</a>
+        <a href="/about.html"><i data-lucide="info" aria-hidden="true"></i> About</a>
+        <a href="/account.html" class="active"><i data-lucide="user-round" aria-hidden="true"></i> My Account</a>
+      </div>
+    </nav>
+
+    <!-- =====================================================
+     MAIN
+===================================================== -->
+
+    <main class="page">
+      <!-- =================================================
+         PROFILE HEADER
+    ================================================== -->
+
+      <div class="account-page-heading">
+        <i data-lucide="user-round" aria-hidden="true"></i>
+        <h1>My Account</h1>
+        <p>Manage your profile, bookings and account settings</p>
+      </div>
+      <section class="profile-header glass">
+        <div class="profile-left">
+          <div class="avatar" id="profileAvatar">U</div>
+
+          <div class="profile-details">
+            <h1 id="profileName">Loading...</h1>
+
+            <p id="profileEmail">Loading...</p>
+
+            <div class="member-badge">
+              <span class="member-check"> ✓ </span>
+
+              YatraSetu Member
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="edit-profile-button"
+          id="editProfileButton"
+          onclick="toggleEditProfile()"
+        >
+          <i data-lucide="pencil" aria-hidden="true"></i> Edit Profile
+        </button>
+      </section>
+
+      <!-- =================================================
+         MAIN GRID
+    ================================================== -->
+
+      <div class="main-grid">
+        <!-- =============================================
+             PERSONAL INFORMATION
+        ============================================== -->
+
+        <section class="information-panel glass">
+          <h2 class="panel-title">
+            <i data-lucide="user-round" aria-hidden="true"></i> Personal
+            Information
+          </h2>
+
+          <div class="info-grid" id="profileInformation">
+            <div class="info-box">
+              <div class="info-icon purple">
+                <i data-lucide="user-round" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Full Name </span>
+
+                <span class="info-value" id="displayName"> — </span>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-icon">
+                <i data-lucide="mail" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Email Address </span>
+
+                <span class="info-value" id="displayEmail"> — </span>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-icon">
+                <i data-lucide="phone" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Mobile Number </span>
+
+                <span class="info-value" id="displayMobile"> — </span>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-icon purple">
+                <i data-lucide="calendar-days" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Date of Birth </span>
+
+                <span class="info-value" id="displayDob"> — </span>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-icon purple">
+                <i data-lucide="venus-and-mars" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Gender </span>
+
+                <span class="info-value" id="displayGender"> — </span>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-icon">
+                <i data-lucide="globe" aria-hidden="true"></i>
+              </div>
+
+              <div class="info-content">
+                <span class="info-label"> Nationality </span>
+
+                <span class="info-value" id="displayNationality"> — </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+                 EDIT FORM
+            ========================================== -->
+
+          <form id="editProfileForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name"> Full Name </label>
+
+                <input type="text" id="name" required autocomplete="name" />
+              </div>
+
+              <div class="form-group">
+                <label for="mobileNumber"> Mobile Number </label>
+
+                <input
+                  type="tel"
+                  id="mobileNumber"
+                  maxlength="10"
+                  inputmode="numeric"
+                  placeholder="10 digit mobile number"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="dateOfBirth"> Date of Birth </label>
+
+                <input type="date" id="dateOfBirth" />
+              </div>
+
+              <div class="form-group">
+                <label for="gender"> Gender </label>
+
+                <select id="gender">
+                  <option value="">Select Gender</option>
+
+                  <option value="Male">Male</option>
+
+                  <option value="Female">Female</option>
+
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="nationality"> Nationality </label>
+
+                <input type="text" id="nationality" placeholder="e.g. Indian" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="save-button">Save Changes</button>
+
+              <button
+                type="button"
+                class="cancel-button"
+                onclick="toggleEditProfile()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- =============================================
+             RIGHT COLUMN
+        ============================================== -->
+
+        <div class="right-column">
+          <!-- =========================================
+                 BOOKINGS
+            ========================================== -->
+
+          <section class="booking-panel glass">
+            <h2 class="panel-title">
+              <i data-lucide="ticket" aria-hidden="true"></i> My Bookings
+            </h2>
+
+            <div class="booking-preview">
+              <div class="booking-top">
+                <div class="booking-icon">
+                  <i data-lucide="ticket" aria-hidden="true"></i>
+                </div>
+
+                <div>
+                  <div class="booking-label">Your journey</div>
+
+                  <div class="booking-route">View your tickets</div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="view-bookings-button"
+              onclick="window.location.href = '/bookings.html'"
+            >
+              <i data-lucide="ticket" aria-hidden="true"></i> View Bookings
+            </button>
+          </section>
+
+          <!-- =========================================
+                 SECURITY
+            ========================================== -->
+
+          <section class="security-panel glass">
+            <h2 class="panel-title">
+              <i data-lucide="lock" aria-hidden="true"></i> Password & Security
+            </h2>
+
+            <button
+              class="security-button"
+              id="showPasswordButton"
+              onclick="togglePasswordForm()"
+            >
+              <i data-lucide="key-round" aria-hidden="true"></i> Change Password
+            </button>
+
+            <!-- PASSWORD FORM -->
+
+            <form id="changePasswordForm">
+              <div class="password-grid">
+                <div class="form-group">
+                  <label for="currentPassword"> Current Password </label>
+
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    autocomplete="current-password"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="newPassword"> New Password </label>
+
+                  <input
+                    type="password"
+                    id="newPassword"
+                    autocomplete="new-password"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword"> Confirm Password </label>
+
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    autocomplete="new-password"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="password-note">
+                Password must contain at least 6 characters.
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="save-button">
+                  Update Password
+                </button>
+
+                <button
+                  type="button"
+                  class="cancel-button"
+                  onclick="togglePasswordForm()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <!-- =================================================
+         ACCOUNT MANAGEMENT
+    ================================================== -->
+
+      <section class="account-management glass">
+        <div>
+          <h2 class="management-title">
+            <i data-lucide="settings" aria-hidden="true"></i> Account Management
+          </h2>
+
+          <p class="management-description">Manage your YatraSetu account.</p>
+        </div>
+
+        <div class="management-buttons">
+          <button class="logout-button" onclick="logoutUser()">
+            <i data-lucide="log-out" aria-hidden="true"></i> Logout
+          </button>
+
+          <button class="delete-button" onclick="deleteAccount()">
+            <i data-lucide="trash-2" aria-hidden="true"></i> Delete Account
+          </button>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Shared YatraSetu footer -->
+    <footer class="account-footer">
+      <div class="footer-brand">
+        <div class="footer-logo"><i data-lucide="train-front" aria-hidden="true"></i><span>YatraSetu</span></div>
+        <p class="footer-tagline">Your journey, connected with convenience.</p>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 YatraSetu. Smart Railway Reservation.</p>
+        <nav class="footer-links" aria-label="Footer links">
+          <a href="#privacy-policy">Privacy Policy</a><span aria-hidden="true">|</span>
+          <a href="#terms">Terms &amp; Conditions</a><span aria-hidden="true">|</span>
+          <a href="#contact">Contact Us</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      /* =====================================================
+       CURRENT USER
+    ===================================================== */
+
+      let currentUser = null;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) lucide.createIcons();
+      });
+
+      /* =====================================================
+       LOAD USER
+    ===================================================== */
+
+      async function loadUser() {
+        try {
+          const response = await fetch("/api/auth/me", {
+            method: "GET",
+            credentials: "include",
+          });
+
+          if (response.status === 401) {
+            alert("Please login first.");
+
+            window.location.href = "/login.html";
+
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error("Unable to load account.");
+          }
+
+          currentUser = await response.json();
+
+          displayUser(currentUser);
+        } catch (error) {
+          console.error("Account loading error:", error);
+
+          alert("Unable to load account information.");
+
+          window.location.href = "/login.html";
+        }
+      }
+
+      /* =====================================================
+       DISPLAY USER
+    ===================================================== */
+
+      function displayUser(user) {
+        const name = user.name || "User";
+
+        document.getElementById("profileName").textContent = name;
+
+        document.getElementById("profileEmail").textContent = user.email || "";
+
+        const firstLetter = name.trim().charAt(0).toUpperCase();
+
+        document.getElementById("profileAvatar").textContent =
+          firstLetter || "U";
+
+        document.getElementById("displayName").textContent = user.name || "—";
+
+        document.getElementById("displayEmail").textContent = user.email || "—";
+
+        setDisplayValue("displayMobile", user.mobileNumber);
+
+        setDisplayValue("displayDob", formatDate(user.dateOfBirth));
+
+        setDisplayValue("displayGender", user.gender);
+
+        setDisplayValue("displayNationality", user.nationality);
+
+        document.getElementById("name").value = user.name || "";
+
+        document.getElementById("mobileNumber").value = user.mobileNumber || "";
+
+        document.getElementById("dateOfBirth").value = user.dateOfBirth || "";
+
+        document.getElementById("gender").value = user.gender || "";
+
+        document.getElementById("nationality").value = user.nationality || "";
+      }
+
+      /* =====================================================
+       DISPLAY VALUE
+    ===================================================== */
+
+      function setDisplayValue(elementId, value) {
+        const element = document.getElementById(elementId);
+
+        if (value === null || value === undefined || value === "") {
+          element.textContent = "Not provided";
+
+          element.classList.add("empty-value");
+        } else {
+          element.textContent = value;
+
+          element.classList.remove("empty-value");
+        }
+      }
+
+      /* =====================================================
+       DATE FORMAT
+    ===================================================== */
+
+      function formatDate(dateString) {
+        if (!dateString) {
+          return null;
+        }
+
+        const date = new Date(dateString + "T00:00:00");
+
+        if (isNaN(date.getTime())) {
+          return dateString;
+        }
+
+        return date.toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      }
+
+      /* =====================================================
+       EDIT PROFILE
+    ===================================================== */
+
+      function toggleEditProfile() {
+        const form = document.getElementById("editProfileForm");
+
+        const button = document.getElementById("editProfileButton");
+
+        if (form.style.display === "block") {
+          form.style.display = "none";
+
+          button.innerHTML =
+            '<i data-lucide="pencil" aria-hidden="true"></i> Edit Profile';
+        } else {
+          form.style.display = "block";
+
+          button.innerHTML = "✕ &nbsp; Close";
+
+          form.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      }
+
+      /* =====================================================
+       UPDATE PROFILE
+    ===================================================== */
+
+      document
+        .getElementById("editProfileForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value.trim();
+
+          const mobileNumber = document
+            .getElementById("mobileNumber")
+            .value.trim();
+
+          const dateOfBirth = document.getElementById("dateOfBirth").value;
+
+          const gender = document.getElementById("gender").value;
+
+          const nationality = document
+            .getElementById("nationality")
+            .value.trim();
+
+          if (!name) {
+            alert("Name is required.");
+
+            return;
+          }
+
+          if (mobileNumber && !/^\d{10}$/.test(mobileNumber)) {
+            alert("Mobile number must contain exactly 10 digits.");
+
+            return;
+          }
+
+          try {
+            const response = await fetch("/api/auth/profile", {
+              method: "PUT",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              credentials: "include",
+
+              body: JSON.stringify({
+                name: name,
+
+                mobileNumber: mobileNumber,
+
+                dateOfBirth: dateOfBirth || null,
+
+                gender: gender,
+
+                nationality: nationality,
+              }),
+            });
+
+            let data = {};
+
+            try {
+              data = await response.json();
+            } catch (jsonError) {
+              console.error("Could not read server response:", jsonError);
+            }
+
+            if (!response.ok) {
+              alert(data.message || "Unable to update profile.");
+
+              return;
+            }
+
+            alert(data.message || "Profile updated successfully.");
+
+            await loadUser();
+
+            document.getElementById("editProfileForm").style.display = "none";
+
+            document.getElementById("editProfileButton").innerHTML =
+              '<i data-lucide="pencil" aria-hidden="true"></i> Edit Profile';
+          } catch (error) {
+            console.error("Profile update error:", error);
+
+            alert("Unable to connect to the server.");
+          }
+        });
+
+      /* =====================================================
+       PASSWORD FORM
+    ===================================================== */
+
+      function togglePasswordForm() {
+        const form = document.getElementById("changePasswordForm");
+
+        const button = document.getElementById("showPasswordButton");
+
+        if (form.style.display === "block") {
+          form.style.display = "none";
+
+          button.innerHTML =
+            '<i data-lucide="key-round" aria-hidden="true"></i> Change Password';
+        } else {
+          form.style.display = "block";
+
+          button.innerHTML = "✕ &nbsp; Close";
+
+          form.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      }
+
+      /* =====================================================
+       CHANGE PASSWORD
+    ===================================================== */
+
+      document
+        .getElementById("changePasswordForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const currentPassword = document
+            .getElementById("currentPassword")
+            .value.trim();
+
+          const newPassword = document
+            .getElementById("newPassword")
+            .value.trim();
+
+          const confirmPassword = document
+            .getElementById("confirmPassword")
+            .value.trim();
+
+          if (!currentPassword || !newPassword || !confirmPassword) {
+            alert("Please fill in all password fields.");
+
+            return;
+          }
+
+          if (newPassword.length < 6) {
+            alert("New password must contain at least 6 characters.");
+
+            return;
+          }
+
+          if (newPassword !== confirmPassword) {
+            alert("New password and confirm password do not match.");
+
+            return;
+          }
+
+          if (currentPassword === newPassword) {
+            alert("New password must be different from the current password.");
+
+            return;
+          }
+
+          try {
+            const response = await fetch("/api/auth/password", {
+              method: "PUT",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              credentials: "include",
+
+              body: JSON.stringify({
+                currentPassword: currentPassword,
+
+                newPassword: newPassword,
+              }),
+            });
+
+            let data = {};
+
+            try {
+              data = await response.json();
+            } catch (jsonError) {
+              console.error("Could not read server response:", jsonError);
+            }
+
+            console.log("Password change response:", response.status, data);
+
+            if (!response.ok) {
+              alert(data.message || "Unable to change password.");
+
+              return;
+            }
+
+            alert(data.message || "Password changed successfully.");
+
+            document.getElementById("changePasswordForm").reset();
+
+            document.getElementById("changePasswordForm").style.display =
+              "none";
+
+            document.getElementById("showPasswordButton").innerHTML =
+              '<i data-lucide="key-round" aria-hidden="true"></i> Change Password';
+          } catch (error) {
+            console.error("Password change error:", error);
+
+            alert(
+              "Unable to connect to the server. Please make sure YatraSetu is running.",
+            );
+          }
+        });
+
+      /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+      async function logoutUser() {
+        const confirmed = confirm("Are you sure you want to logout?");
+
+        if (!confirmed) {
+          return;
+        }
+
+        try {
+          await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+
+          localStorage.removeItem("userId");
+
+          localStorage.removeItem("userName");
+
+          localStorage.removeItem("userEmail");
+
+          window.location.href = "/";
+        } catch (error) {
+          console.error("Logout error:", error);
+
+          localStorage.removeItem("userId");
+
+          localStorage.removeItem("userName");
+
+          localStorage.removeItem("userEmail");
+
+          window.location.href = "/";
+        }
+      }
+
+      /* =====================================================
+       DELETE ACCOUNT
+    ===================================================== */
+
+      async function deleteAccount() {
+        const firstConfirm = confirm(
+          "Are you sure you want to permanently delete your YatraSetu account?",
+        );
+
+        if (!firstConfirm) {
+          return;
+        }
+
+        const secondConfirm = confirm(
+          "This action cannot be undone. Delete your account?",
+        );
+
+        if (!secondConfirm) {
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/auth/account", {
+            method: "DELETE",
+            credentials: "include",
+          });
+
+          let data = {};
+
+          try {
+            data = await response.json();
+          } catch (jsonError) {
+            console.error("Could not read server response:", jsonError);
+          }
+
+          if (!response.ok) {
+            alert(data.message || "Unable to delete account.");
+
+            return;
+          }
+
+          alert(data.message || "Account deleted successfully.");
+
+          localStorage.removeItem("userId");
+
+          localStorage.removeItem("userName");
+
+          localStorage.removeItem("userEmail");
+
+          window.location.href = "/";
+        } catch (error) {
+          console.error("Delete account error:", error);
+
+          alert("Unable to connect to the server.");
+        }
+      }
+
+      /* =====================================================
+       START PAGE
+    ===================================================== */
+
+      loadUser();
+    </script>
+  </body>
+</html>
